@@ -1,6 +1,8 @@
 <?php
 
-$lobiapi = new LobiAPI\LobiAPI();
+require 'LobiAPI/LobiAPI.php';
+
+$lobiapi = new LobiAPI();
 
 //$lobiapi->Login("mail", "pass");
 //$lobiapi->TwitterLogin("mail", "pass");
