@@ -1,7 +1,7 @@
 <?php
-namespace delion\LobiAPI\HttpAPI;
 
 class Http{
+
 	public $cookie_path;
 
 	public function __construct($cookie_file_path = ''){

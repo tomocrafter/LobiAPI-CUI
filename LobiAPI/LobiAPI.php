@@ -1,10 +1,10 @@
 <?php
-namespace delion\LobiAPI;
 
-use delion\LobiAPI\HttpAPI\Http;
-use delion\LobiAPI\HttpAPI\Header;
+use HttpAPI\Http;
+use HttpAPI\Header;
 
 class LobiAPI{
+
 	private $NetworkAPI = null;
 
 	public function __construct(){
@@ -53,7 +53,7 @@ class LobiAPI{
 		return strpos($this->NetworkAPI->get(Pattern::get_string($source2, Pattern::$twitter_redirect_to_lobi, '"'), $header1), 'ログインに失敗しました') === false;
 	}
 
-	public function GetMe(){
+	public function getMe(){
 		$header = (new Header())
 			->setAccept('application/json, text/plain, */*')
 			->setUserAgent('Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36')
@@ -62,7 +62,7 @@ class LobiAPI{
 		return json_decode($this->NetworkAPI->get('https://web.lobi.co/api/me?fields=premium', $header), false);
 	}
 
-	public function GetPublicGroupList(){
+	public function getPublicGroupList(){
 		$header = (new Header())
 			->setAccept('application/json, text/plain, */*')
 			->setUserAgent('Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36')
@@ -83,7 +83,7 @@ class LobiAPI{
 		return $result;
 	}
 
-	public function GetPrivateGroupList(){
+	public function getPrivateGroupList(){
 		$header = (new Header())
 			->setAccept('application/json, text/plain, */*')
 			->setUserAgent('Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36')
@@ -104,7 +104,7 @@ class LobiAPI{
 		return $result;
 	}
 
-	public function GetNotifications(){
+	public function getNotifications(){
 		$header = (new Header())
 			->setAccept('application/json, text/plain, */*')
 			->setUserAgent('Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36')
@@ -113,7 +113,7 @@ class LobiAPI{
 		return json_decode($this->NetworkAPI->get('https://web.lobi.co/api/me?fields=premium', $header), false);
 	}
 
-	public function GetContacts($uid){
+	public function getContacts($uid){
 		$header = (new Header())
 			->setAccept('application/json, text/plain, */*')
 			->setUserAgent('Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36')
@@ -122,7 +122,7 @@ class LobiAPI{
 		return json_decode($this->NetworkAPI->get("https://web.lobi.co/api/user/$uid/contacts", $header), false);
 	}
 
-	public function GetFollowers($uid){
+	public function getFollowers($uid){
 		$header = (new Header())
 			->setAccept('application/json, text/plain, */*')
 			->setUserAgent('Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36')
@@ -131,7 +131,7 @@ class LobiAPI{
 		return json_decode($this->NetworkAPI->get("https://web.lobi.co/api/user/$uid/followers", $header), false);
 	}
 
-	public function GetGroup($uid){
+	public function getGroup($uid){
 		$header = (new Header())
 			->setAccept('application/json, text/plain, */*')
 			->setUserAgent('Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36')
@@ -140,7 +140,7 @@ class LobiAPI{
 		return json_decode($this->NetworkAPI->get("https://web.lobi.co/api/group/$uid?error_flavor=json2&fields=group_bookmark_info%2Capp_events_info", $header), false);
 	}
 
-	public function GetGroupMembersCount($uid){
+	public function getGroupMembersCount($uid){
 		$header = (new Header())
 			->setAccept('application/json, text/plain, */*')
 			->setUserAgent('Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36')
@@ -154,7 +154,7 @@ class LobiAPI{
 		return $result->members_count;
 	}
 
-	public function GetGroupMembers($uid){
+	public function getGroupMembers($uid){
 		$header = (new Header())
 			->setAccept('application/json, text/plain, */*')
 			->setUserAgent('Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36')
@@ -175,7 +175,7 @@ class LobiAPI{
 		return $result;
 	}
 
-	public function GetThreads($uid, $count = 20){
+	public function getThreads($uid, $count = 20){
 		$header = (new Header())
 			->setAccept('application/json, text/plain, */*')
 			->setUserAgent('Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36')

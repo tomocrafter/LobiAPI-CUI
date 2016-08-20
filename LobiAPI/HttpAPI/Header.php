@@ -1,7 +1,7 @@
 <?php
-namespace delion\LobiAPI\HttpAPI;
 
 class Header{
+
 	public $Host = '';
 	public $Connection = true;
 	public $Accept = '';
