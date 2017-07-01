@@ -21,7 +21,7 @@ class LobiAPI{
 			->setAccept('text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8')
 			->setUserAgent('Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36')
 			->setAcceptLanguage('ja,en-US;q=0.8,en;q=0.6');
-		return strpos($this->NetworkAPI->post('https://lobi.co/signin', $post_data, $header2), 'ログインに失敗しました') === false;
+		return strpos($this->NetworkAPI->post('https://lobi.co/signin', $post_data, $header2), '繝ｭ繧ｰ繧､繝ｳ縺ｫ螟ｱ謨励＠縺ｾ縺励◆') === false;
 	}
 	public function TwitterLogin($mail, $password){
 		$header1 = (new Header())
@@ -38,9 +38,9 @@ class LobiAPI{
 			->setUserAgent('Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36')
 			->setAcceptLanguage('ja,en-US;q=0.8,en;q=0.6');
 		$source2 = $this->NetworkAPI->post('https://api.twitter.com/oauth/authorize', $post_data, $header2);
-		if(strpos($source2, 'Twitterにログイン') !== false)
+		if(strpos($source2, 'Twitter縺ｫ繝ｭ繧ｰ繧､繝ｳ') !== false)
 			return false;
-		return strpos($this->NetworkAPI->get(Pattern::get_string($source2, Pattern::$twitter_redirect_to_lobi, '"'), $header1), 'ログインに失敗しました') === false;
+		return strpos($this->NetworkAPI->get(Pattern::get_string($source2, Pattern::$twitter_redirect_to_lobi, '"'), $header1), '繝ｭ繧ｰ繧､繝ｳ縺ｫ螟ｱ謨励＠縺ｾ縺励◆') === false;
 	}
 	public function getMe(){
 		$header = (new Header())
@@ -239,6 +239,21 @@ class LobiAPI{
 			'description' => $description
 		];
 		$this->NetworkAPI->post("https://web.lobi.co/api/me/profile", $data, $header);
+	}
+
+	public function KickMember($token, $user_agent, $group_id, $target_user){
+		$header = (new Header())
+			->setHost('api.lobi.co')
+			->setAccept('application/json, text/plain, */*')
+			->setUserAgent($user_agent);
+
+		$data = [
+			'lang' => 'ja',
+			'token' => $token,
+			'target_user' => $target_user
+		];
+
+		$this->NetworkAPI->post("https://api.lobi.co/1/group/$group_id/kick", $data, $header);
 	}
 }
 class Pattern{
